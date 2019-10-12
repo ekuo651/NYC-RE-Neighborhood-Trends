@@ -1,5 +1,7 @@
 # The Gen-S Project
 
+![logo](Images/gen_s_logo.jpg)
+
 ## Team Members
 * Michana Pubien
 * Emmy Kuo
