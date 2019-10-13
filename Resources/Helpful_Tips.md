@@ -7,3 +7,15 @@
 ### Troubleshooting Tabula
 
 [CalledProcessError]("https://github.com/chezou/tabula-py/issues/93")
+
+### Zip Code Mapping
+
+[ZipCodeNeighborhood]("https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm")
+
+### Fill empty cells with previous row data
+'df.fillna(method='ffill',inplace=True)'
+
+### Reshaping dataframe
+https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html
+
+
