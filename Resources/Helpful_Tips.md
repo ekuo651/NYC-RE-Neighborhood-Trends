@@ -18,4 +18,5 @@
 ### Reshaping dataframe
 https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html
 
-
+### Splitting columns by delimiter
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html
