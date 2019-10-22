@@ -31,6 +31,10 @@ We decided to look at three main factors that make up a neighborhood: people, pl
 
 ## **The Data**
 
+Each of the 5 datasets was obtained from a different governement entity. They came in different file formats, were organized differently, used different indices, included different identifying information and often had different formats throughout the years. We used the following technologies to tame our data.
+
+![](Presentation_materials/technologies.png)
+
 
 ### **Crime Data**
 ![](Presentation_materials/nypd_logo.png)\
@@ -40,6 +44,7 @@ NYC crime data was obtained from the [NYPD website]() for 2000 - 2018. The entir
 ### **Income Data**
 ![](Presentation_materials/irs_logo.png)\
 Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
+![](Presentation_materials/income_transform.png)
 
 ### **Sales Data**
 ![](Presentation_materials/nyc_finance_logo.png)\
@@ -71,11 +76,11 @@ In order to add 'Neighborhood' to the dataframe, the JUNCTION TABLE dataframe wa
 ![](Presentation_materials/nygov-logo.png)\
 Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number. 
 
+![](Presentation_materials/opp_transform.png)
+
 ---
 
 ## **How did we combine the selected variables?**
-
-Each of the 5 datasets was obtained from a different governement entity. They came in different file formats, were organized differently, used different indices, included different identifying information and often had different formats throughout the years.
 
 Since the objective was to study the neighborhoods, we created a junction table to merge with each dataset so that each variable's dataset could include a 'neighborhood' column. Each entry in the sales data included a pre-categorized neighborhood, BBL (borough, block, lot) and zipcode, so we used the sales data to create a junction table. 
 
