@@ -43,13 +43,29 @@ Income tax returns data was obtained directly from the [IRS](https://www.irs.gov
 
 ### **Sales Data**
 ![](Presentation_materials/nyc_finance_logo.png)\
-Sales data was obtained from the [NYC Department of Finance website](https://www1.nyc.gov/site/finance/taxes/property-annualized-sales-update.page) for years 2003 to 2018. The data was available as 80 .xls files, one per year per borough. 
+Sales data was obtained from the [NYC Department of Finance website](https://www1.nyc.gov/site/finance/taxes/property-annualized-sales-update.page) for years 2003 to 2018. The data was available as 80 separate excel files, one per borough per year. 
+
+First, the 80 spreadsheets were converted to csv files using Microsoft Excel. Then each file was loaded into pgAdmin, where the data was was concatenated by borough through the years, resulting in 5 csv file exports. The per borough csv files were loaded into Jupyter Lab and converted to 1 dataframe. (Staten Island was later excluded due to a lack of crime data, so only 4 boroughs were combined.) 
+
+A junction table was created from the combined dataframe since the sales data already included neighborhoods as a field. The junction table included neighborhood, zipcode, borough and block number. 
+
+After the junction table was exported, the dataframe was then used to calculate metrics and the calculated metrics were exported as a csv to be used in the Joint Analysis.
+
+![](Presentation_materials/sales_transform.png)
 
 ### **Development Data**
 ![](Presentation_materials/DOB_logo.png)\
 Development data was obtained from NYC OPEN DATA. The dataset used was the [DOB Job Filing dataset](https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2) that covered 2000-2019. The data was available by API through Socrata. 
 
-The [sodapy SDK](https://github.com/xmunoz/sodapy) was installed as a Python library to used to access the API.
+The [sodapy SDK](https://github.com/xmunoz/sodapy) was installed as a Python library to used to access the API. The following SoQl query was used to get information from the API. Note that the 'limit' field had to be specified since the default get only retrieved 1000 rows of data. 
+```
+query = "select Borough, Block, Lot, Pre__Filing_Date, Initial_Cost limit 1700421"
+```
+The data was converted into a dataframe. Since the datatypes from the API were all 'objects', the 'Block' column had to be converted to 'integer' in order to be compatible for a merge. 
+
+In order to add 'Neighborhood' to the dataframe, the JUNCTION TABLE dataframe was joined using both 'Borough' and 'Block'. Metrics for development were then calculated and exported via csv to be used in Joint Analysis.
+
+![](Presentation_materials/dev_transform.png)
 
 ### **Opportunity Zone Data**
 ![](Presentation_materials/nygov-logo.png)\
