@@ -27,33 +27,35 @@ We decided to look at three main factors that make up a neighborhood: people, pl
 
 **Policy** 
 * Opportunity Zones (NYC Empire State Development)
+---
 
-## **What did the data look like?**
-
+## **The Data**
 
 
 ### **Crime Data**
-
+![](Presentation_materials/nypd_logo.png)\
 NYC crime data was obtained from the [NYPD website]() for 2000 - 2018. The entire period of data came as one spreadsheet, and had to be normalized. Additionally, the data was indexed by Precinct number, and not neighborhood.
 
 
 ### **Income Data**
-
+![](Presentation_materials/irs_logo.png)\
 Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
 
 ### **Sales Data**
-
+![](Presentation_materials/nyc_finance_logo.png)\
 Sales data was obtained from the [NYC Department of Finance website](https://www1.nyc.gov/site/finance/taxes/property-annualized-sales-update.page) for years 2003 to 2018. The data was available as 80 .xls files, one per year per borough. 
 
 ### **Development Data**
-
+![](Presentation_materials/DOB_logo.png)\
 Development data was obtained from NYC OPEN DATA. The dataset used was the [DOB Job Filing dataset](https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2) that covered 2000-2019. The data was available by API through Socrata. 
 
 The [sodapy SDK](https://github.com/xmunoz/sodapy) was installed as a Python library to used to access the API.
 
 ### **Opportunity Zone Data**
-
+![](Presentation_materials/nygov-logo.png)\
 Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number. 
+
+---
 
 ## **How did we combine the selected variables?**
 
@@ -67,7 +69,10 @@ Crime data and Opportunity Zone did not include any of the fields in the junctio
 
 Crime data had to be mapped to an alternate neighborhoods list. Then the list had to be manually mapped to the Neighborhood field in junction table. 
 
+---
 
 ## **Our Current Snapshot**
+
+---
 
 ## **How did we evaluate growth?**
