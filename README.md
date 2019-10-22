@@ -39,21 +39,21 @@ NYC crime data was obtained from the [NYPD website]() for 2000 - 2018. The entir
 
 ### **Income Data**
 
-Income tax returns data was obtained directly from the [IRS]('https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi') for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
+Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
 
 ### **Sales Data**
 
-Sales data was obtained from the [NYC Department of Finance website]('https://www1.nyc.gov/site/finance/taxes/property-annualized-sales-update.page') for years 2003 to 2018. The data was available as 80 .xls files, one per year per borough. 
+Sales data was obtained from the [NYC Department of Finance website](https://www1.nyc.gov/site/finance/taxes/property-annualized-sales-update.page) for years 2003 to 2018. The data was available as 80 .xls files, one per year per borough. 
 
 ### **Development Data**
 
-Development data was obtained from NYC OPEN DATA. The dataset used was the [DOB Job Filing dataset]('https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2') that covered 2000-2019. The data was available by API through Socrata. 
+Development data was obtained from NYC OPEN DATA. The dataset used was the [DOB Job Filing dataset](https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2) that covered 2000-2019. The data was available by API through Socrata. 
 
-The [sodapy SDK]('https://github.com/xmunoz/sodapy) was installed as a Python library to used to access the API.
+The [sodapy SDK](https://github.com/xmunoz/sodapy) was installed as a Python library to used to access the API.
 
 ### **Opportunity Zone Data**
 
-Opportunity Zone information was obtained from the [NYS Empire Development website]('https://esd.ny.gov/opportunity-zones'). It came in a PDF format where each zone was identified by a census tract number. 
+Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number. 
 
 ## **How did we combine the selected variables?**
 
