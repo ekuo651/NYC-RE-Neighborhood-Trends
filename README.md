@@ -1,4 +1,4 @@
-# New York City Neighborhood Transformation and Development
+# NYC Neighborhood Transformation and Development
 ### JC Soliman, Emmy Kuo & Michana Pubien 
 
 The New York City real estate market is an immensely complex environment that is constantly changing and developing. Predicting the next up & coming neighborhood could mean turning a huge profit, while a small misstep could mean huge losses. 
