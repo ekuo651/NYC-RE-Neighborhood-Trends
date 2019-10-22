@@ -35,16 +35,19 @@ Each of the 5 datasets was obtained from a different governement entity. They ca
 
 ![](Presentation_materials/technologies.png)
 
+---
 
 ### **Crime Data**
 ![](Presentation_materials/nypd_logo.png)\
 NYC crime data was obtained from the [NYPD website]() for 2000 - 2018. The entire period of data came as one spreadsheet, and had to be normalized. Additionally, the data was indexed by Precinct number, and not neighborhood.
 
-
+---
 ### **Income Data**
 ![](Presentation_materials/irs_logo.png)\
 Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
 ![](Presentation_materials/income_transform.png)
+
+---
 
 ### **Sales Data**
 ![](Presentation_materials/nyc_finance_logo.png)\
@@ -57,6 +60,8 @@ A junction table was created from the combined dataframe since the sales data al
 After the junction table was exported, the dataframe was then used to calculate metrics and the calculated metrics were exported as a csv to be used in the Joint Analysis.
 
 ![](Presentation_materials/sales_transform.png)
+
+---
 
 ### **Development Data**
 ![](Presentation_materials/DOB_logo.png)\
@@ -72,6 +77,8 @@ In order to add 'Neighborhood' to the dataframe, the JUNCTION TABLE dataframe wa
 
 ![](Presentation_materials/dev_transform.png)
 
+---
+
 ### **Opportunity Zone Data**
 ![](Presentation_materials/nygov-logo.png)\
 Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number. 
@@ -80,7 +87,7 @@ Opportunity Zone information was obtained from the [NYS Empire Development websi
 
 ---
 
-## **How did we combine the selected variables?**
+## **Combining the Variables**
 
 Since the objective was to study the neighborhoods, we created a junction table to merge with each dataset so that each variable's dataset could include a 'neighborhood' column. Each entry in the sales data included a pre-categorized neighborhood, BBL (borough, block, lot) and zipcode, so we used the sales data to create a junction table. 
 
@@ -91,6 +98,35 @@ Crime data and Opportunity Zone did not include any of the fields in the junctio
 Crime data had to be mapped to an alternate neighborhoods list. Then the list had to be manually mapped to the Neighborhood field in junction table. 
 
 ---
+## **Calculating Aggregate Scores**
+Each neighborhood was ranked in terms of their latest crime rate (lowest crime rate -> highest value), latest income (highest income -> highest value), average sales (highest average -> highest value) and cumulative development spending (highest cume -> highest value).
+
+### **Equal Weights to All Variables**
+An aggregate neighborhood score was calculated using the following equation where each variable's ranking was given the same weight.
+
+![](Presentation_materials/eq_weight_eqn.png)
+
+### **Weighting Variables by Data Completeness**
+The number of years covered by the data available for each variable were different for each variable.
+
+* Crime: 18 years
+* Income: 13 years
+* Sales: 16 years
+* Development: 19 Years
+
+The equation below weights each variable based on the relative completeness of data across the years. 
+
+![](Presentation_materials/completeness_eqn.png)
+
+### **Weighting Variables by Data Loss during Data Cleaning**
+The data did not come in the same format, so many transformations and mappings of data had to be made to get all the variables on the same neighborhood index. Techniques to approximate and fill dataframes and approximate mappings of data were made. The equation below includes weights assigned by the data cleaner based on the data cleaner's take of data reliability & data loss. 
+
+![](Presentation_materials/reliableness_eqn.png)
+
+* **Sales** - Since the sales data was used to create the junction table, a score of **10/10** was assigned to the sales variable. 
+* **Development** - Development data was identified by block and borough, which was also in the sales junction table. However, there was no proof that the list of borough and block on the junction table was exhaustive. There were several unmapped datapoints, so a score of **9/10** was assigned. 
+* **Income** - Income data was available by zipcode and was an exhaustive list. The zipcode to neighborhood mapping was many to many, so arithmetic means were used to determine the income by neighborhood. A score of **8/10** was assigned.
+* **Crime** -  The data was originally available per precinct. A non-exhaustive mapping of precinct to neighborhood was used to map to neighborhood. However, that list of neighborhoods only contained ~100 neighborhoods. A manual mapping of that neighborhood list had to be performed to the junction table neighborhood list, which had ~200 neighborhoods. Therefore, a score of **5/10** was assigned to the crime data.  
 
 ## **Our Current Snapshot**
 
