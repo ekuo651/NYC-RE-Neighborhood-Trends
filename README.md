@@ -1,3 +1,7 @@
+## **Blueprint**
+
+![](Presentation_materials/blueprint.png)
+
 # NYC Neighborhood Transformation and Development
 ### JC Soliman, Emmy Kuo & Michana Pubien 
 
