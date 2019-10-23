@@ -8,7 +8,6 @@ With the passing of an increased 'Mansion Tax', activity in the condo market has
 Activity in Manhattan experienced the lowest third quarter sales since 2009, reported Corcoran. The median sale price fell by 8% while the mean sale price fell by 12%. It has become increasingly necessary to look to other boroughs and neighborhoods for development opportunities.
 
 
-
 ## **Our Approach**
 
 Before making any predictions or recommendations, we first constructed an accurate snapshot of NYC neighborhoods and explored the growth trends in those neighborhoods. Then we developed a criteria to rank the neighborhoods by how suitable they are for investment. Finally, we looked at how well the models coincided with indicators in current policy.
@@ -41,11 +40,32 @@ Each of the 5 datasets was obtained from a different governement entity. They ca
 ![](Presentation_materials/nypd_logo.png)\
 NYC crime data was obtained from the [NYPD website]() for 2000 - 2018. The entire period of data came as one spreadsheet, and had to be normalized. Additionally, the data was indexed by Precinct number, and not neighborhood.
 
+We were able to find a neighborhood to Precinct mapping but that came in an image format.  We first converted the image to CSV then used that mapping to merge into the original crime data.
+Next, I was able to stack the data by year using the melt function.  That allowed for us to sort the data by year in a new column.
+The last step was to create a new dataframe to sync my file to the junction table, which took quite a bit of manipulation to come to a final crime data file for our analysis.
+
+![](Presentation_materials/Crime_transformation.png)\
+
 ---
 ### **Income Data**
 ![](Presentation_materials/irs_logo.png)\
-Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 14 separate spreadsheets, one per year, with each year in a different format. The income tax data was indexed by zipcode.
-![](Presentation_materials/income_transform.png)
+Income tax returns data was obtained directly from the [IRS](https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2016-zip-code-data-soi) for 2003-2016. The data came in 13 separate spreadsheets, one per year, with each year in a different structure, with ZIP code as the closest identifier to neighborhood. 
+
+Key to cleaning up the income data is first understanding the level of inconsistency across all spreadsheets, and then finding a singular approach, i.e a function, to produce one consolidated data frame. The processes embedded in the function include:
+* reading the filenames that came in different naming conventions
+* ensuring all spreadsheets had all the information required for our analysis
+* selecting those columns and aligning them in the right order
+* renaming the columns to allow for efficient concatenation
+* dropping unwanted rows
+* finding nuanced representations of zeroes and replacing them with zeroes
+* dropping the nulls
+* converting the columns to appropriate data types
+* calculating the mean values
+
+Calling this function with year as input in a concatenation command allowed for efficient processing of the data frame. The data frame was then merged with a junction table that had both zip andto enhance it with a neighborhood column. The resulting data frame was then used to produced the metrics by neighborhood.
+
+![](Presentation_materials/income_data_transformation.png)
+
 
 ---
 
@@ -81,7 +101,9 @@ In order to add 'Neighborhood' to the dataframe, the JUNCTION TABLE dataframe wa
 
 ### **Opportunity Zone Data**
 ![](Presentation_materials/nygov-logo.png)\
-Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number. 
+Opportunity Zone information was obtained from the [NYS Empire Development website](https://esd.ny.gov/opportunity-zones). It came in a PDF format where each zone was identified by a census tract number and neighborhood names.
+
+The tabula py library, which required installation of Java Developer Kit, enabled us to read a pdf file and convert it to a dataframe. Similar to the crime data, this neighborhood column did not align with the rest of the datasets' neighborhood index. A manual mapping had to be built in the backend to ensure consistency.
 
 ![](Presentation_materials/opp_transform.png)
 
@@ -130,6 +152,60 @@ The data did not come in the same format, so many transformations and mappings o
 
 ## **Our Current Snapshot**
 
+![](Presentation_materials/current_snapshot.png)
+
+As expected, our model consistently found neighborhoods that are historically well developed. The top ten current neighborhoods are below.
+
+* Midtown West
+* Upper West Side (59-79)
+* Midtown East
+* Murray Hill
+* Upper West Side (79-96)
+* Kips Bay
+* Gramercy
+* Harlem Central
+* Parkslope
+* Long Island City
+
+However, Chelsea, Midtown Central Business District & Flatiron, which we expected to see in the top ten, fell to the high twenties due to their relatively high crime rates. For further analysis, crime data should take into account population density. It should be noted that based on the third calcualtion method, which lowers the weight of crime rank, Midtown CBD, Flatiron and Chelsea ranked 13, 17 & 18 respectively.
+
+
 ---
 
 ## **How did we evaluate growth?**
+
+![](Presentation_materials/yearly_trend.png)
+
+The average rate of change for the entire period of the dataset was calculated for each variable. Additionally, we calculated the average rate of change for the last 3 years and the last 5 years per neighborhood. The difference between the 3 year ROC, 5 year ROC and average ROC were calculated as well. 
+
+We used the comparison between the 3 year ROC and the average ROC as the primary basis for investment recommendation. Additionally, we incorporated opportunity zones into our model. The equations including the binary opportunity zone variable are below.
+
+![](Presentation_materials/op_eqns.png)
+
+![](Presentation_materials/3_year_comparison.png)
+
+![](Presentation_materials/top20.png)
+
+Based on this method of analysis, the following ten neighborhoods were identified as suitable for investment, especially for investors who are looking to defer capital gains across asset classes (not exclusive to real estate capital gains). 
+
+* Soundview
+* Gowanuns
+* Woodhaven
+* East Tremont
+* Rego Park
+* Jamaica
+* Longwood
+* Crotona Park
+* Redhook
+* Corona
+
+![](Presentation_materials/bottom20.png)
+
+## **Our Recommendations**
+
+The methodology used in calculating the investment worthiness of a neighborhood in this project has limitations. Our next steps to further mature the model include:
+* employ more accurate estimation methodologies such as linear regression
+* use research-based weighting of variables
+* explore more sources of data
+
+
