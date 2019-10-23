@@ -126,7 +126,7 @@ Each neighborhood was ranked in terms of their latest crime rate (lowest crime r
 ### **Equal Weights to All Variables**
 An aggregate neighborhood score was calculated using the following equation where each variable's ranking was given the same weight.
 
-![](Presentation_materials/eq_weight_eqn.png)
+![](Presentation_materials/eq_weight_eqn.png )
 
 ### **Weighting Variables by Data Completeness**
 The number of years covered by the data available for each variable were different for each variable.
@@ -152,8 +152,11 @@ The data did not come in the same format, so many transformations and mappings o
 
 ## **Our Current Snapshot**
 
+<<<<<<< HEAD
 ![](Presentation_materials/current_snapshot.png)
 
+=======
+>>>>>>> a5214815755c975fa0f34b18ac7581f56450600d
 As expected, our model consistently found neighborhoods that are historically well developed. The top ten current neighborhoods are below.
 
 * Midtown West
@@ -174,18 +177,24 @@ However, Chelsea, Midtown Central Business District & Flatiron, which we expecte
 
 ## **How did we evaluate growth?**
 
+<<<<<<< HEAD
 ![](Presentation_materials/yearly_trend.png)
 
+=======
+>>>>>>> a5214815755c975fa0f34b18ac7581f56450600d
 The average rate of change for the entire period of the dataset was calculated for each variable. Additionally, we calculated the average rate of change for the last 3 years and the last 5 years per neighborhood. The difference between the 3 year ROC, 5 year ROC and average ROC were calculated as well. 
 
 We used the comparison between the 3 year ROC and the average ROC as the primary basis for investment recommendation. Additionally, we incorporated opportunity zones into our model. The equations including the binary opportunity zone variable are below.
 
 ![](Presentation_materials/op_eqns.png)
 
+<<<<<<< HEAD
 ![](Presentation_materials/3_year_comparison.png)
 
 ![](Presentation_materials/top20.png)
 
+=======
+>>>>>>> a5214815755c975fa0f34b18ac7581f56450600d
 Based on this method of analysis, the following ten neighborhoods were identified as suitable for investment, especially for investors who are looking to defer capital gains across asset classes (not exclusive to real estate capital gains). 
 
 * Soundview
@@ -198,6 +207,7 @@ Based on this method of analysis, the following ten neighborhoods were identifie
 * Crotona Park
 * Redhook
 * Corona
+<<<<<<< HEAD
 
 ![](Presentation_materials/bottom20.png)
 
@@ -209,3 +219,5 @@ The methodology used in calculating the investment worthiness of a neighborhood 
 * explore more sources of data
 
 
+=======
+>>>>>>> a5214815755c975fa0f34b18ac7581f56450600d
